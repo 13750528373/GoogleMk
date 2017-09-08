@@ -1,4 +1,4 @@
-package com.kx.app2.view;
+package com.kx.app2.base;
 
 import android.content.Context;
 import android.os.SystemClock;
@@ -30,7 +30,7 @@ public abstract class AyscTaskView extends FrameLayout {
 
 
     public AyscTaskView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public AyscTaskView(Context context, AttributeSet attrs) {
@@ -55,15 +55,32 @@ public abstract class AyscTaskView extends FrameLayout {
 
     }
 
-    /**重写 第一阶段增加了扩展**/
+    /**
+     * 重写 第一阶段增加了扩展
+     **/
     protected void preExecute() {
         //TODO
     }
 
+    private boolean isLoading = false;
+
     public void getDataFromServer() {
+        //解决重复加载问题
+        if (currentState == STATE_SUCCESS) {
+            return;
+        }
+
+        //正在加载中的防重复处理（针对手快用户）
+        if (isLoading) {
+            return;
+        }
+        isLoading = true;
+
+
         currentState = STATE_LOADING;
         refreshUi();
-        new Thread(new LoadDataTash()){}.start();
+        //刷数据地点
+        new Thread(new LoadDataTash()).start();
     }
 
     private void refreshUi() {
@@ -81,23 +98,20 @@ public abstract class AyscTaskView extends FrameLayout {
     }
 
 
-
-    /**由baseFragment进来，抽象给子类处理，谁调用，谁具体实现，由子类执行连接服务器，获取数据的任务**/
-
-    protected abstract View createSuccessView();
-
     private class LoadDataTash implements Runnable {
 
         @Override
         public void run() {
             SystemClock.sleep(1515);
-            currentState = getServerData();
+            Result result = getServerData();
+            currentState = result.getState();
             safeRefreshUi();
+            isLoading = false;
         }
     }
 
     private void safeRefreshUi() {
-        UiUtils.getHandler().post(new Runnable() {
+        UiUtils.postTask(new Runnable() {
             @Override
             public void run() {
                 refreshUi();
@@ -105,5 +119,27 @@ public abstract class AyscTaskView extends FrameLayout {
         });
     }
 
-    protected abstract int getServerData();
+
+    protected abstract View createSuccessView();
+
+    /**
+     * 由baseFragment进来，抽象给子类处理，谁调用，谁具体实现，由子类执行连接服务器，获取数据的任务
+     **/
+    protected abstract Result getServerData();
+
+    public enum Result {
+        EMPTE(STATE_EMPTY), ERROR(STATE_ERROR), SUCCESS(STATE_SUCCESS);
+
+        private int mState;
+
+        Result(int state) {
+            this.mState = state;
+        }
+
+        public int getState() {
+            return mState;
+        }
+    }
+
+
 }

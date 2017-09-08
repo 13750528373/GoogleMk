@@ -4,17 +4,17 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ViewGroup;
 
 import com.kx.app2.R;
-import com.kx.app2.fragment.AppFragemt;
-import com.kx.app2.fragment.HomeFragment;
-import com.kx.app2.fragment.OtherFragment;
+import com.kx.app2.base.BaseFragment;
+import com.kx.app2.manager.FragmentFactory;
 import com.kx.app2.utils.UiUtils;
 
 import butterknife.BindView;
@@ -41,14 +41,50 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         initToolBar();
-        mTitle = UiUtils.getStringArray(R.array.pagers);
+        initData();
 
+
+    }
+
+    private void initData() {
+        mTitle = UiUtils.getStringArray(R.array.pagers);
         mVp.setAdapter(new kAdapter(getSupportFragmentManager()));
+        mVp.addOnPageChangeListener(onPagerChangeListener1);
         mTablayout.setupWithViewPager(mVp);
     }
 
+    ViewPager.OnPageChangeListener onPagerChangeListener1 = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-    public class kAdapter extends FragmentPagerAdapter{
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            BaseFragment baseFragment = FragmentFactory.getInstance().createrFragment(position);
+            baseFragment.loadData();
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+
+    private boolean isFirshEnter = true;
+
+    //StatePagerAdapter
+    public class kAdapter extends FragmentStatePagerAdapter{
+
+        @Override
+        public void finishUpdate(ViewGroup container) {
+            super.finishUpdate(container);
+            if(isFirshEnter){
+                onPagerChangeListener1.onPageSelected(0);
+                isFirshEnter = false;
+            }
+
+        }
 
         public kAdapter(FragmentManager fm) {
             super(fm);
@@ -64,18 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            Fragment fragment = null;
-            switch (position) {
-                case 0:
-                    fragment = new HomeFragment();
-                    break;
-                case 1:
-                    fragment = new AppFragemt();
-                    break;
-                default:
-                    fragment = new OtherFragment();
-                    break;
-            }
+            Fragment fragment = FragmentFactory.getInstance().createrFragment(position);
 
             return fragment;
         }
@@ -96,5 +121,7 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
     }
 
+    public void loadData(){
 
+    }
 }

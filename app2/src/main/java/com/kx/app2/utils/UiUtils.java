@@ -26,7 +26,7 @@ public class UiUtils {
     }
 
 
-    public void postTask(Runnable task) {
+    public static void postTask(Runnable task) {
         sHandler.post(task);
     }
 
