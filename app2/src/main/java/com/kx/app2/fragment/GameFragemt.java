@@ -32,7 +32,6 @@ public class GameFragemt extends BaseFragment {
     @Override
     protected AyscTaskView.Result doInbackground() {
 
-
         try {
             GameProtocol2 gameProtocol2 = new GameProtocol2();
             Map<String,String> m = new HashMap<>();
