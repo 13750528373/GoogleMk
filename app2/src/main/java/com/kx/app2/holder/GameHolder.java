@@ -18,7 +18,7 @@ import butterknife.BindView;
  */
 
 
-public class AppHolder extends BaseHolder<ApkItem> {
+public class GameHolder extends BaseHolder<ApkItem> {
     @BindView(R.id.item_appinfo_iv_icon)
     ImageView mItemAppinfoIvIcon;
     @BindView(R.id.item_appinfo_tv_title)
@@ -31,7 +31,7 @@ public class AppHolder extends BaseHolder<ApkItem> {
     TextView mItemAppinfoTvDes;
 
 
-    public AppHolder(View convertView) {
+    public GameHolder(View convertView) {
         super(convertView);
     }
 

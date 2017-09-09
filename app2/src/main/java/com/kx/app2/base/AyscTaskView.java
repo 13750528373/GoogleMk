@@ -78,9 +78,13 @@ public abstract class AyscTaskView extends FrameLayout {
 
 
         currentState = STATE_LOADING;
+
+        //1.状态改变后刷新界面，展示loadingView
         refreshUi();
-        //刷数据地点
-        new Thread(new LoadDataTash()).start();
+
+        //刷数据地点 .开启子线程，连接服务器
+        ThreadManager.getNormalPool().execute(new LoadDataTash());
+
     }
 
     private void refreshUi() {

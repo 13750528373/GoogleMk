@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.kx.app2.R;
-import com.kx.app2.adapter.AppAdapter;
+import com.kx.app2.adapter.GameAdapter;
 import com.kx.app2.base.AyscTaskView;
 import com.kx.app2.base.BaseFragment;
 import com.kx.app2.bean.ApkItem;
-import com.kx.app2.protocol.AppProtocol;
+import com.kx.app2.protocol.GameProtocol2;
 import com.kx.app2.utils.UiUtils;
 
 import java.util.ArrayList;
@@ -25,9 +25,8 @@ import butterknife.ButterKnife;
 /**
  * Created by KX on 2017/9/5.
  */
-public class AppFragemt extends BaseFragment {
-    List<ApkItem> mData = new ArrayList<>();
-
+public class GameFragemt extends BaseFragment {
+    ArrayList<ApkItem> mData = new ArrayList<>();
 
 
     @Override
@@ -35,17 +34,16 @@ public class AppFragemt extends BaseFragment {
 
 
         try {
-            AppProtocol appProtocol = new AppProtocol();
-            Map<String,String> params = new HashMap<>();
-            params.put("index","0");
-            appProtocol.setParams(params);
-            mData = appProtocol.loadData();
-            if(mData.size() == 0){
+            GameProtocol2 gameProtocol2 = new GameProtocol2();
+            Map<String,String> m = new HashMap<>();
+            m.put("index","0");
+            gameProtocol2.setParams(m);
+
+            List<ApkItem> apkItems = gameProtocol2.loadData();
+            if (apkItems == null || apkItems.size() == 0) {
                 return AyscTaskView.Result.EMPTE;
             }
-
-        }
-         catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -56,8 +54,8 @@ public class AppFragemt extends BaseFragment {
     protected View onPostExecute() {
 
         ListView listView = new ListView(UiUtils.getContext());
-        AppAdapter homeAdapter = new AppAdapter(R.layout.item_app_info, UiUtils.getContext(), mData);
-        listView.setAdapter(homeAdapter);
+        GameAdapter gameAdapter = new GameAdapter(R.layout.item_app_info, UiUtils.getContext(), mData);
+        listView.setAdapter(gameAdapter);
         return listView;
     }
 

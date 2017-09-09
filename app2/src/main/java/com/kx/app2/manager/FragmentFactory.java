@@ -2,6 +2,7 @@ package com.kx.app2.manager;
 
 import com.kx.app2.base.BaseFragment;
 import com.kx.app2.fragment.AppFragemt;
+import com.kx.app2.fragment.GameFragemt;
 import com.kx.app2.fragment.HomeFragment;
 import com.kx.app2.fragment.OtherFragment;
 
@@ -41,6 +42,9 @@ public class FragmentFactory  {
                 break;
             case 1:
                 fragment = new AppFragemt();
+                break;
+            case 2:
+                fragment = new GameFragemt();
                 break;
             default:
                 fragment = new OtherFragment();
