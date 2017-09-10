@@ -26,25 +26,25 @@ public abstract class BaseFragment extends Fragment {
                 protected void preExecute() {
                     super.preExecute();
                 }
-
+                //当前是基类页面，只能让具体来执行,实例对象，设置Adapter
+                @Override
+                protected View createSuccessView() {
+                    return onPostExecute();
+                }
                 @Override
                 protected Result getServerData() {
                     return doInbackground();
                 }
 
-                @Override
-                protected View createSuccessView() {
-                    return onPostExecute();
-                }
             };
         }
         return commonView;
     }
 
-    //请求服务器后，刷新UI的方法
+    //请求服务器后，刷新UI的方法，刷数据
     protected abstract AyscTaskView.Result doInbackground();
 
-    //当前是基类页面，只能让具体来执行
+    //当前是基类页面，只能让具体来执行,实例对象，设置Adapter
     protected abstract View onPostExecute();
 
 

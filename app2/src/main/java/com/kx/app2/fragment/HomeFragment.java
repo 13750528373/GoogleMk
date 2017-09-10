@@ -9,6 +9,7 @@ import com.kx.app2.base.AyscTaskView;
 import com.kx.app2.base.BaseFragment;
 import com.kx.app2.bean.ApkItem;
 import com.kx.app2.bean.HomeBean;
+import com.kx.app2.holder.HomePicHolder;
 import com.kx.app2.protocol.HomeProtocol;
 import com.kx.app2.utils.UiUtils;
 
@@ -21,8 +22,8 @@ import java.util.List;
  */
 public class HomeFragment extends BaseFragment {
 
-    List<ApkItem> mData = new ArrayList<>();
 
+    List<ApkItem> mData = new ArrayList<>();
 
     @Override
     protected AyscTaskView.Result doInbackground() {
@@ -33,21 +34,24 @@ public class HomeFragment extends BaseFragment {
         p.put("index", String.valueOf(0));
         homeProtocol.setParams(p);
         try {
-            HomeBean homeBeen =  homeProtocol.loadData();
+            HomeBean homeBeen = homeProtocol.loadData();
+            //数据
             mData = homeBeen.list;
+            mPics = homeBeen.picture;
 
-            //TODO homebaen.picture;
             if (mData.size() == 0) {
                 return AyscTaskView.Result.EMPTE;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            return  AyscTaskView.Result.ERROR;
+            return AyscTaskView.Result.ERROR;
         }
 
         return AyscTaskView.Result.SUCCESS;
     }
+
+    private List<String> mPics;
 
     @Override
     protected View onPostExecute() {
@@ -55,6 +59,17 @@ public class HomeFragment extends BaseFragment {
         ListView listView = new ListView(UiUtils.getContext());
         HomeAdapter homeAdapter = new HomeAdapter(R.layout.item_app_info, UiUtils.getContext(), mData);
         listView.setAdapter(homeAdapter);
+
+        View picView = View.inflate(UiUtils.getContext(), R.layout.item_home_picture, null);
+        HomePicHolder homePicHolder = new HomePicHolder(picView);
+        homePicHolder.bindData(mPics);
+        listView.addHeaderView(picView);
+
+
         return listView;
     }
+
+
+
+
 }

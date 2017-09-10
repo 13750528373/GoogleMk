@@ -72,6 +72,7 @@ public abstract class BasicAdapter<T> extends BaseAdapter {
         BaseHolder holder = null;
         if (convertView == null) {
             if (position == getCount() - 1) {
+
                 convertView = View.inflate(mContext, R.layout.item_load_more, null);
                 holder = new LoadMoreHolder(convertView);
             } else {
@@ -162,10 +163,10 @@ public abstract class BasicAdapter<T> extends BaseAdapter {
             UiUtils.postTask(new Runnable() {
                 @Override
                 public void run() {
-                    holder.bindData(finalState); //LoadMoreHolder
                     if (finalState != LoadMoreHolder.STATE_RETRY) {
                         notifyDataSetChanged();//刷新UI
                     }
+                    holder.bindData(finalState); //LoadMoreHolder
 
                     isLoadingMore =false;
                 }

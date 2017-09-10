@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  * Created by KX on 2017/9/5.
  */
 public class GameFragemt extends BaseFragment {
-    ArrayList<ApkItem> mData = new ArrayList<>();
+    List<ApkItem> mData = new ArrayList<>();
 
 
     @Override
@@ -38,8 +38,8 @@ public class GameFragemt extends BaseFragment {
             m.put("index","0");
             gameProtocol2.setParams(m);
 
-            List<ApkItem> apkItems = gameProtocol2.loadData();
-            if (apkItems == null || apkItems.size() == 0) {
+            mData = gameProtocol2.loadData();
+            if (mData == null || mData.size() == 0) {
                 return AyscTaskView.Result.EMPTE;
             }
         } catch (Exception e) {

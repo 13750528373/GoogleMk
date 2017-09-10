@@ -7,4 +7,7 @@ package com.kx.app2.utils;
 public class Constans {
 
     public static final String HOST = "http://10.0.2.2:8080/GooglePlayServer/";
+
+    /**首页轮播图**/
+    public static final String IMAGE = HOST + "image?name=";
 }

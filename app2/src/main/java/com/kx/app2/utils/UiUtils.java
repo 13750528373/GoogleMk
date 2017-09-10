@@ -30,11 +30,11 @@ public class UiUtils {
         sHandler.post(task);
     }
 
-    public void postDelayTask(Runnable task, long time) {
+    public static void postDelayTask(Runnable task, long time) {
         sHandler.postDelayed(task, time);
     }
 
-    public void removeTask(Runnable task) {
+    public static void removeTask(Runnable task) {
         sHandler.removeCallbacks(task);
     }
 

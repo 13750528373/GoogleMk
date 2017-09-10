@@ -4,7 +4,10 @@ import com.kx.app2.base.BaseFragment;
 import com.kx.app2.fragment.AppFragemt;
 import com.kx.app2.fragment.GameFragemt;
 import com.kx.app2.fragment.HomeFragment;
+import com.kx.app2.fragment.HotFragment;
 import com.kx.app2.fragment.OtherFragment;
+import com.kx.app2.fragment.RecommendFragment;
+import com.kx.app2.fragment.SubjectFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +48,15 @@ public class FragmentFactory  {
                 break;
             case 2:
                 fragment = new GameFragemt();
+                break;
+            case 3:
+                fragment = new SubjectFragment();
+                break;
+            case 4:
+                fragment = new RecommendFragment();
+                break;
+            case 6:
+                fragment = new HotFragment();
                 break;
             default:
                 fragment = new OtherFragment();
