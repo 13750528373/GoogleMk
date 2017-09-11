@@ -54,7 +54,7 @@ public class HotFragment extends BaseFragment {
         FlowLayout flowLayout = new FlowLayout(UiUtils.getContext());
         flowLayout.setPadding(10, 10, 10, 10);
         for (int i = 0; i < mDatas.size(); i++) {
-            TextView textView = new TextView(UiUtils.getContext());
+            final TextView textView = new TextView(UiUtils.getContext());
             textView.setText(mDatas.get(i));
             textView.setPadding(5, 5, 5, 5);
             textView.setGravity(Gravity.CENTER);
@@ -83,7 +83,7 @@ public class HotFragment extends BaseFragment {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(UiUtils.getContext(), "不要乱点", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UiUtils.getContext(), textView.getText(), Toast.LENGTH_SHORT).show();
                 }
             });
 

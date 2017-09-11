@@ -12,6 +12,7 @@ import com.kx.app2.R;
  * 保证它的宽高可以适配所有手机
  */
 public class RatioLayout extends FrameLayout {
+
     private float mRatio;
     private int mode;
     public static final int MODE_WIDTH = 0;
@@ -24,6 +25,7 @@ public class RatioLayout extends FrameLayout {
     public RatioLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray typedArray = getResources().obtainAttributes(attrs, R.styleable.RatioLayout);
+
         mRatio = typedArray.getFloat(R.styleable.RatioLayout_mRatio, 2.42f);
         mode = typedArray.getInteger(R.styleable.RatioLayout_relative_mode, MODE_WIDTH); //默认是固定宽度，动态高度
         typedArray.recycle();
@@ -65,4 +67,5 @@ public class RatioLayout extends FrameLayout {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }
     }
+
 }

@@ -25,6 +25,8 @@ public class HomeFragment extends BaseFragment {
 
     List<ApkItem> mData = new ArrayList<>();
 
+
+
     @Override
     protected AyscTaskView.Result doInbackground() {
 
@@ -68,7 +70,6 @@ public class HomeFragment extends BaseFragment {
 
         return listView;
     }
-
 
 
 

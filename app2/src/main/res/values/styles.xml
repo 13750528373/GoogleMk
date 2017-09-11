@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <declare-styleable name="RatioLayout">
+        <attr name="mRatio" format="float"></attr>
+        <attr name="relative_mode" format="enum">
+            <enum name="WIDTH" value="0" />
+            <enum name="HEIGHT" value="1"/>
+        </attr>
+    </declare-styleable>
+
 </resources>
