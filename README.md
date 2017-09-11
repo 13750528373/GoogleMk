@@ -68,7 +68,7 @@
 #3.war包方式:
 		 1.把war包放到D:\java_web\apachetomcat7.0.54windowsx64\apachetomcat7.0.54\webapps目录下面就可以,然后启动tomcat会自动解压war包.
 		 2. 启动tomcat,自动解压war包,并运行程序 
-		 3. 修改工程目录下system.properties为WebInfos所在的目录,如老师的电脑为  	dir=D:\Lesson_GooglePlay+6\day01\Server`，需要注意要么用"/"或者"\\"
+		 3. 修改工程目录下system.properties为WebInfos所在的目录,如me的电脑为  	dir=D:\Lesson_GooglePlay+6\day01\Server`，需要注意要么用"/"或者"\\"
 		 4. 在pc和手机上分别验证 
 		 5. `注意:tomcat必须使用7以上版本`
 
