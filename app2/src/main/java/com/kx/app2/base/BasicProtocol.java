@@ -4,6 +4,7 @@ import android.os.Environment;
 
 import com.google.gson.Gson;
 import com.kx.app2.utils.Constans;
+import com.kx.app2.utils.MD5Utils;
 import com.kx.app2.utils.UiUtils;
 
 import java.io.BufferedReader;

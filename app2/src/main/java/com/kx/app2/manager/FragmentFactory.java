@@ -2,10 +2,10 @@ package com.kx.app2.manager;
 
 import com.kx.app2.base.BaseFragment;
 import com.kx.app2.fragment.AppFragemt;
+import com.kx.app2.fragment.CategotyFragment;
 import com.kx.app2.fragment.GameFragemt;
 import com.kx.app2.fragment.HomeFragment;
 import com.kx.app2.fragment.HotFragment;
-import com.kx.app2.fragment.OtherFragment;
 import com.kx.app2.fragment.RecommendFragment;
 import com.kx.app2.fragment.SubjectFragment;
 
@@ -55,12 +55,13 @@ public class FragmentFactory  {
             case 4:
                 fragment = new RecommendFragment();
                 break;
+            case 5:
+                fragment = new CategotyFragment();
+                break;
             case 6:
                 fragment = new HotFragment();
                 break;
-            default:
-                fragment = new OtherFragment();
-                break;
+
         }
 
         mFragmentCache.put(position,fragment);
